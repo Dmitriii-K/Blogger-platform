@@ -1,5 +1,5 @@
 // ...
-import { Router, Response, Request, NextFunction } from "express";
+/*import { Router, Response, Request, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 
 export const postRouter = Router();
@@ -52,3 +52,4 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
   next();
 };
+*/

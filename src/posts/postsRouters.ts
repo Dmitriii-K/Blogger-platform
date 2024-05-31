@@ -5,7 +5,7 @@ import { findPostController } from "./findPostController";
 import { updatePostController } from "./updatePostController";
 import { deletePostController } from "./deletePostController";
 import {
-  createInputValidation,
+  postInputValidation,
   inputCheckErrorsMiddleware,
 } from "./middlewaresPosts/middlewareForCreatePost";
 
@@ -48,7 +48,7 @@ export const postRouter = Router();
 postRouter.get("/", getPostsController);
 postRouter.post(
   "/",
-  createInputValidation,
+  postInputValidation,
   inputCheckErrorsMiddleware,
   (req: Request, res: Response) => {
     createPostController;
