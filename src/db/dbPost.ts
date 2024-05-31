@@ -1,19 +1,19 @@
-export type DBType = {
+export type DBPostType = {
   posts: any[];
 };
 
-export const db: DBType = {
+export const dbPost: DBPostType = {
   posts: [],
 };
 
-export const setDB = (dataset?: Partial<DBType>) => {
+export const setDB = (dataset?: Partial<DBPostType>) => {
   if (!dataset) {
     // если в функцию ничего не передано - то очищаем базу данных
-    db.posts = [];
+    dbPost.posts = [];
     return;
   }
 
   // если что-то передано - то заменяем старые значения новыми
-  db.posts = dataset.posts || db.posts;
+  dbPost.posts = dataset.posts || dbPost.posts;
   // db.some = dataset.some || db.some
 };

@@ -1,5 +1,5 @@
 // ...
-/*import { Router, Response, Request, NextFunction } from "express";
+import { Router, Response, Request, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 
 export const postRouter = Router();
@@ -21,7 +21,7 @@ const inputCheckErrorsMiddleware = (req, res, next) => {
   const e = validationResult(req);
   const errors = e.array();
   if (errors.length) {
-    // res.status(400).json({ errorsMessages: errors.map(=>) })
+     res.status(400).json({ errorsMessages: errors.map(=>) })
     return;
   }
 
@@ -52,4 +52,3 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
   next();
 };
-*/

@@ -1,20 +1,24 @@
-import { Router } from "express";
+import { Router, Response, Request, NextFunction } from "express";
 import { getPostsController } from "./getPostsController";
 import { createPostController } from "./createPostController";
 import { findPostController } from "./findPostController";
 import { updatePostController } from "./updatePostController";
 import { deletePostController } from "./deletePostController";
+import {
+  createInputValidation,
+  inputCheckErrorsMiddleware,
+} from "./middlewaresPosts/middlewareForCreatePost";
 
 export const postRouter = Router();
 
 // ...
 
-/*postRouter.get(
+/*postRouter.post(
   "/",
   authMiddleware,
-  // postTitleInputValidator, // и это мидлвэер
-  // ...postInputValidators, // это тоже мидлвэеры
-  // inputCheckErrorsMiddleware, // и это мидлвэер
+  postTitleInputValidator, // и это мидлвэер
+  postInputValidators, // это тоже мидлвэеры
+  inputCheckErrorsMiddleware, // и это мидлвэер
   (req, res, next) => {
     // и это мидлвэер
 
@@ -40,10 +44,16 @@ export const postRouter = Router();
     // и это мидлвэер
     saveSameLogs(req);
   }
-);
-*/
+);*/
 postRouter.get("/", getPostsController);
-postRouter.post("/", createPostController);
+postRouter.post(
+  "/",
+  createInputValidation,
+  inputCheckErrorsMiddleware,
+  (req: Request, res: Response) => {
+    createPostController;
+  }
+);
 postRouter.get("/:id", findPostController);
 postRouter.put("/:id", updatePostController);
 postRouter.delete("/:id", deletePostController);

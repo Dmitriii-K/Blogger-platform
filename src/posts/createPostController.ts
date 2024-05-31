@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../db/dbPost";
+import { dbPost } from "../db/dbPost";
 import { PostInputModel } from "../input-output-types/posts-type";
 
 export const createPostController = (
@@ -15,6 +15,6 @@ export const createPostController = (
     //blogName: db.blogs.blogName,
   };
 
-  db.posts.push(newPost);
+  dbPost.posts.push(newPost);
   res.status(201).json(newPost);
 };

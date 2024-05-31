@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../db/dbPost";
+import { dbPost } from "../db/dbPost";
 import {
   PostInputModel,
   PostViewModel,
@@ -11,10 +11,12 @@ export const updatePostController = (
   res: Response<PostViewModel | OutputErrorsType>
 ) => {
   let updatePost;
-  for (let i = 0; i < db.posts.length; i++) {
-    const post = db.posts[i];
+  for (let i = 0; i < dbPost.posts.length; i++) {
+    const post = dbPost.posts[i];
     if (post.id.toString() === req.params.id) {
       updatePost = post;
+    } else {
+      res.sendStatus(404);
     }
   }
   updatePost.title = req.body.title;

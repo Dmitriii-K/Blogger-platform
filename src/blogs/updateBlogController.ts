@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../db/dbBlog";
+import { dbBlog } from "../db/dbBlog";
 import {
   BlogInputModel,
   BlogViewModel,
@@ -11,10 +11,12 @@ export const updateBlogController = (
   res: Response<BlogViewModel | OutputErrorsType>
 ) => {
   let updateBlog;
-  for (let i = 0; i < db.blogs.length; i++) {
-    const blog = db.blogs[i];
+  for (let i = 0; i < dbBlog.blogs.length; i++) {
+    const blog = dbBlog.blogs[i];
     if (blog.id.toString() === req.params.id) {
       updateBlog = blog;
+    } else {
+      res.sendStatus(404);
     }
   }
   updateBlog.name = req.body.name;

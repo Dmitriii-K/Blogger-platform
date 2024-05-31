@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db } from "../db/dbBlog";
+import { dbBlog } from "../db/dbBlog";
 import { BlogInputModel } from "../input-output-types/blogs-type";
 
 export const createBlogController = (
@@ -13,6 +13,6 @@ export const createBlogController = (
     websiteUrl: req.body.websiteUrl,
   };
 
-  db.blogs.push(newBlog);
+  dbBlog.blogs.push(newBlog);
   res.status(201).json(newBlog);
 };

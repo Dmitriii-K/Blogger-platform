@@ -1,7 +1,7 @@
-export type DBType = {
+export type DBBlogType = {
   blogs: any[];
 };
 
-export const db: DBType = {
+export const dbBlog: DBBlogType = {
   blogs: [],
 };
