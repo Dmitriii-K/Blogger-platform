@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../db/dbPost";
 
-/*export const deletePostController = (req: Request, res: Response<any>) => {
+export const deletePostController = (req: Request, res: Response<any>) => {
   const id = +req.params.id;
   const deletePost = db.posts.filter((p) => p.id !== id);
   if (deletePost.length < db.posts.length) {
@@ -10,9 +10,9 @@ import { db } from "../db/dbPost";
   } else {
     res.sendStatus(404);
   }
-};*/
+};
 
-export const deletePostController = (req: Request, res: Response<any>) => {
+/*export const deletePostController = (req: Request, res: Response<any>) => {
   const id = +req.params.id;
   for (let i = 0; i < db.posts.length; i++) {
     const post = db.posts[i];
@@ -23,4 +23,4 @@ export const deletePostController = (req: Request, res: Response<any>) => {
       res.sendStatus(404);
     }
   }
-};
+};*/

@@ -9,6 +9,10 @@ export const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.status(200).json("WORKING");
+});
+
 //app.use(SETTINGS.PATH.BLOGS, blogRouter);
 app.use(SETTINGS.PATH.POSTS, postRouter);
 app.use("/testing", deleteRouter);

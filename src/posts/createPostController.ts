@@ -12,10 +12,9 @@ export const createPostController = (
     shortDescription: req.body.shortDescription,
     content: req.body.content,
     blogId: req.body.blogId,
-    //blogName: req.body.blogName,
+    //blogName: db.blogs.blogName,
   };
 
   db.posts.push(newPost);
-
   res.status(201).json(newPost);
 };
