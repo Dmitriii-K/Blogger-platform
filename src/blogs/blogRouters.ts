@@ -4,12 +4,28 @@ import { createBlogController } from "./createBlogController";
 import { findBlogController } from "./findBlogController";
 import { updateBlogController } from "./updateBlogController";
 import { deleteBlogController } from "./deleteBlogController";
-import { authMiddleware } from ".././posts/middlewaresPosts/middlewareForCreatePost";
+import {
+  authMiddleware,
+  blogInputValidation,
+  inputCheckErrorsMiddleware,
+} from ".././posts/middlewaresPosts/middlewareForCreatePost";
 
 export const blogRouter = Router();
 
 blogRouter.get("/", getBlogsController);
-blogRouter.post("/", createBlogController);
+blogRouter.post(
+  "/",
+  authMiddleware,
+  blogInputValidation,
+  inputCheckErrorsMiddleware,
+  createBlogController
+);
 blogRouter.get("/:id", findBlogController);
-blogRouter.put("/:id", updateBlogController);
+blogRouter.put(
+  "/:id",
+  authMiddleware,
+  blogInputValidation,
+  inputCheckErrorsMiddleware,
+  updateBlogController
+);
 blogRouter.delete("/:id", authMiddleware, deleteBlogController);

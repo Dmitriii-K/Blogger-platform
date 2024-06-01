@@ -1,40 +1,49 @@
 import { Router, Response, Request, NextFunction } from "express";
 import { body, validationResult } from "express-validator";
 import { dbBlog } from "../../db/dbBlog";
-import { ADMIN_AUTH } from "../../settings";
+import { SETTINGS } from "../../settings";
 
-const urlPattern = /([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/;
+const urlPattern =
+  /^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/;
 
 export const blogInputValidation = [
   body("name")
     .isString()
+    .trim()
     .isLength({ max: 15 })
     .withMessage("Имя слишком длинное"),
   body("description")
     .isString()
+    .withMessage("не строка")
+    .rtrim()
     .isLength({ max: 500 })
     .withMessage("Описание превышает максимальное кол-во символов"),
   body("websiteUrl")
     .isString()
-    .isURL()
+    .withMessage("не строка")
+    .trim()
+    // .isURL()
     .matches(urlPattern)
-    .withMessage("URL сайта не соответствует шаблону")
-    .isLength({ max: 100 })
-    .withMessage("URL-адрес веб-сайта слишком длинный"),
+    .withMessage("not url")
+    .isLength({ min: 1, max: 100 })
+    .withMessage("более 100 символов"),
 ];
 
 export const postInputValidation = [
   body("title")
     .isString()
     .isLength({ max: 30 })
+    .trim()
     .withMessage("Заголовок слишком длинный"),
   body("shortDescription")
     .isString()
     .isLength({ max: 100 })
+    .trim()
     .withMessage("Описание превышает максимальное кол-во символов"),
   body("content")
     .isString()
     .isLength({ max: 1000 })
+    .trim()
     .withMessage("Содержание превышает максимальное кол-во символов"),
   body("blogId")
     .isString()
@@ -69,14 +78,13 @@ export const inputCheckErrorsMiddleware = (
   next();
 };
 
-// get from SETTINGS
 export const authMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const auth = req.headers["authorisation"] as string;
-  console.log(auth);
+  const auth = req.headers["authorization"] as string;
+  // console.log(auth);
   if (!auth) {
     res.status(401).json({});
     return;
@@ -84,14 +92,14 @@ export const authMiddleware = (
   // const buff = Buffer.from(auth.slice(6), "base64");
   // const decodedAuth = buff.toString("utf8");
 
-  const buff2 = Buffer.from(ADMIN_AUTH, "utf8");
+  const buff2 = Buffer.from(SETTINGS.ADMIN, "utf8");
   const codedAuth = buff2.toString("base64");
 
-  // if (decodedAuth === ADMIN_AUTH || auth.slice(0, 5) !== "Basic dmain:qwerty") {
+  // if (decodedAuth === ADMIN_AUTH || auth.slice(0, 5) !== "Basic ") {
   //   res.status(401).json({});
   //   return;
   // }
-  if (auth.slice(6) !== codedAuth || auth.slice(0, 5) !== "Basic") {
+  if (auth.slice(6) !== codedAuth || auth.slice(0, 6) !== "Basic ") {
     res.status(401).json({});
     return;
   }

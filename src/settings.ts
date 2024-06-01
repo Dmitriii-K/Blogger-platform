@@ -7,5 +7,5 @@ export const SETTINGS = {
     BLOGS: "/blogs",
     POSTS: "/posts",
   },
+  ADMIN: process.env.ADMIN || "admin:qwerty",
 };
-export const ADMIN_AUTH = "admin:qwerty";
