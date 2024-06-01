@@ -8,3 +8,4 @@ export const SETTINGS = {
     POSTS: "/posts",
   },
 };
+export const ADMIN_AUTH = "admin:qwerty";

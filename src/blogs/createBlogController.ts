@@ -7,7 +7,7 @@ export const createBlogController = (
   res: Response<any>
 ) => {
   const newBlog = {
-    id: +new Date(),
+    id: Date.now().toString(),
     name: req.body.name,
     description: req.body.description,
     websiteUrl: req.body.websiteUrl,

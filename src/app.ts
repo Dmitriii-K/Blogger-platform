@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { SETTINGS } from "./settings";
 import { deleteRouter } from "./deleteAllData";
-//import { blogRouter } from "./blogs/blogRouters";
+import { blogRouter } from "./blogs/blogRouters";
 import { postRouter } from "./posts/postsRouters";
 
 export const app = express();
@@ -13,6 +13,6 @@ app.get("/", (req, res) => {
   res.status(200).json("WORKING");
 });
 
-//app.use(SETTINGS.PATH.BLOGS, blogRouter);
+app.use(SETTINGS.PATH.BLOGS, blogRouter);
 app.use(SETTINGS.PATH.POSTS, postRouter);
 app.use("/testing", deleteRouter);

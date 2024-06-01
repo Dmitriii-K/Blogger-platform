@@ -50,9 +50,10 @@ postRouter.post(
   "/",
   postInputValidation,
   inputCheckErrorsMiddleware,
-  (req: Request, res: Response) => {
-    createPostController;
-  }
+  // (req: Request, res: Response) => {
+  //   createPostController;
+  // }
+  createPostController
 );
 postRouter.get("/:id", findPostController);
 postRouter.put("/:id", updatePostController);

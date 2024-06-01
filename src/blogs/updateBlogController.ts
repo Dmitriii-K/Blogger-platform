@@ -13,10 +13,10 @@ export const updateBlogController = (
   let updateBlog;
   for (let i = 0; i < dbBlog.blogs.length; i++) {
     const blog = dbBlog.blogs[i];
-    if (blog.id.toString() === req.params.id) {
-      updateBlog = blog;
-    } else {
+    if (!blog.id.toString() === req.params.id) {
       res.sendStatus(404);
+    } else {
+      updateBlog = blog;
     }
   }
   updateBlog.name = req.body.name;
