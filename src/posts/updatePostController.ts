@@ -13,7 +13,7 @@ export const updatePostController = (
   let updatePost;
   for (let i = 0; i < dbPost.posts.length; i++) {
     const post = dbPost.posts[i];
-    if (!post.id.toString() === req.params.id) {
+    if (post.id.toString() !== req.params.id) {
       res.sendStatus(404);
     } else {
       updatePost = post;
