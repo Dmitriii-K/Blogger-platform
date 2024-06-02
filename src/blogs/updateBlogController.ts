@@ -11,13 +11,11 @@ export const updateBlogController = (
   res: Response<BlogViewModel | OutputErrorsType>
 ) => {
   let updateBlog;
-  for (let i = 0; i < dbBlog.blogs.length; i++) {
-    const blog = dbBlog.blogs[i];
-    if (blog.id.toString() !== req.params.id) {
-      res.sendStatus(404);
-    } else {
-      updateBlog = blog;
-    }
+  const blog = dbBlog.blogs.find((b) => b.id === req.params.id);
+  if (!blog) {
+    res.sendStatus(404);
+  } else {
+    updateBlog = blog;
   }
   updateBlog.name = req.body.name;
   updateBlog.description = req.body.description;

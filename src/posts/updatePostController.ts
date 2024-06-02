@@ -11,13 +11,11 @@ export const updatePostController = (
   res: Response<PostViewModel | OutputErrorsType>
 ) => {
   let updatePost;
-  for (let i = 0; i < dbPost.posts.length; i++) {
-    const post = dbPost.posts[i];
-    if (post.id.toString() !== req.params.id) {
-      res.sendStatus(404);
-    } else {
-      updatePost = post;
-    }
+  const post = dbPost.posts.find((p) => p.id === req.params.id);
+  if (!post) {
+    res.sendStatus(404);
+  } else {
+    updatePost = post;
   }
   updatePost.title = req.body.title;
   updatePost.shortDescription = req.body.shortDescription;
